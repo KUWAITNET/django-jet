@@ -11,7 +11,7 @@ except ImportError:
         pass
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse
-from django.core.urlresolvers import reverse, resolve, NoReverseMatch
+from django.urls import reverse, resolve, NoReverseMatch
 from django.contrib.admin import AdminSite
 from django.utils.encoding import smart_text
 from django.utils.text import capfirst
@@ -19,7 +19,6 @@ from django.contrib import messages
 from django.utils.encoding import force_text
 from django.utils.functional import Promise
 from django.contrib.admin.options import IncorrectLookupParameters
-from django.core import urlresolvers
 from django.contrib import admin
 
 
@@ -167,7 +166,7 @@ def get_model_queryset(admin_site, model, request, preserved_filters=None):
     model_admin = admin_site._registry.get(model)
 
     try:
-        changelist_url = urlresolvers.reverse('%s:%s_%s_changelist' % (
+        changelist_url = reverse('%s:%s_%s_changelist' % (
             admin_site.name,
             model._meta.app_label,
             model._meta.model_name
